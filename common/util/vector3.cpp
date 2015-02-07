@@ -1,13 +1,48 @@
 #include "vector3.h"
-#include <math.h>
+#include <cmath>
 
 Vector3::Vector3() : x(0), y(0), z(0)
 {
 }
 
-Vector3::Vector3(float newX, float newY, float newZ) : x(newX), y(newY), z(newZ)
+Vector3::Vector3(const float newX, const float newY, const float newZ) : x(newX), y(newY), z(newZ)
 {
 }
+
+Vector3::Vector3(const float vect[3]) : x(vect[0]), y(vect[1]), z(vect[2])
+{
+}
+
+const float Vector3::getX()
+{
+	return x;
+}
+
+const float Vector3::getY()
+{
+	return y;
+}
+
+const float Vector3::getZ()
+{
+	return z;
+}
+
+void Vector3::setX(const float newX)
+{
+	x = newX;
+}
+
+void Vector3::setY(const float newY)
+{
+	y = newY;
+}
+
+void Vector3::setZ(const float newZ)
+{
+	z = newZ;
+}
+
 
 Vector3& Vector3::Set(float newX, float newY, float newZ)
 {
@@ -48,6 +83,11 @@ Vector3& Vector3::operator/=(float t)
   y *= f;
   z *= f;
   return (*this);
+}
+
+Vector3& Vector3::operator%=(const Vector3& other)
+{
+	return *this = (*this % other);
 }
 
 Vector3& Vector3::operator&=(const Vector3& vector)
@@ -111,9 +151,23 @@ bool Vector3::operator!=(const Vector3& vector) const
   return ((x != vector.x) || (y != vector.y) || (z != vector.z));
 }
 
+const float Vector3::GetLength()
+{
+	const float squared = x * x + y * y + z * z;
+	if (squared != 0)
+		return sqrtf(squared);
+	else
+		return 0;
+}
+
+
 Vector3& Vector3::Normalize()
 {
-  return (*this /= sqrtf(x * x + y * y + z * z));
+	float length = this->GetLength();
+	if (length != 0)
+		return (*this /= length);
+	else
+		return *this;
 }
 
 Vector3& Vector3::RotateAboutX(float angle)
