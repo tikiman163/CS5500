@@ -20,11 +20,13 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/test
 )
 
-add_definitions( -std=c++0x )
-
-set(EXTRA_COMPILE_FLAGS "-Wall -Wextra -Werror -Wno-missing-braces -g")
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} ${EXTRA_COMPILE_FLAGS})
-set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS})
+if(WIN32)
+else()
+  add_definitions( -std=c++0x )
+  set(EXTRA_COMPILE_FLAGS "-Wall -Wextra -Werror -Wno-missing-braces -g")
+  set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} ${EXTRA_COMPILE_FLAGS})
+  set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS})
+endif()
 
 set(client_srcs
   client/src/main.cpp
