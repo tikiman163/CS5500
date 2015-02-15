@@ -11,21 +11,7 @@ public:
 
   Vector3();
 
-  Vector3(const float r, const float s, const float t);
-
-  Vector3(const float vect[3]);
-
-  const float getX();
-
-  const float getY();
-
-  const float getZ();
-
-  void setX(const float newX);
-
-  void setY(const float newY);
-
-  void setZ(const float newZ);
+  Vector3(float r, float s, float t);
 
   Vector3& Set(float r, float s, float t);
 
@@ -36,8 +22,6 @@ public:
   Vector3& operator*=(float t);
 
   Vector3& operator/=(float t);
-
-  Vector3& operator%=(const Vector3& other);
 
   Vector3& operator&=(const Vector3& vector);
 
@@ -51,10 +35,8 @@ public:
 
   Vector3 operator/(float t) const;
 
-  //Dot product of a 2 vectors
   float operator*(const Vector3& vector) const;
 
-  //Cross product of 2 vectors
   Vector3 operator%(const Vector3& vector) const;
 
   Vector3 operator&(const Vector3& vector) const;
@@ -63,7 +45,6 @@ public:
 
   bool operator!=(const Vector3& vector) const;
 
-  const float GetLength();
   Vector3& Normalize();
 
   Vector3& RotateAboutX(float angle);

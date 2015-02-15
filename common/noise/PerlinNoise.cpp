@@ -4,7 +4,7 @@
 
 #include "PerlinNoise.h"
 
-PerlinNoise::PerlinNoise(unsigned int seed)
+PerlinNoise::PerlinNoise(uint seed)
 {
   std::default_random_engine generator;
   generator.seed(seed);
