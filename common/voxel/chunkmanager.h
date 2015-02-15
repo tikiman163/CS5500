@@ -3,14 +3,14 @@
 
 // Class dependencies
 #include <vector>
+#include <string>
 #include "chunk.h"
 #include "vector3.h"
-#include "tbb/concurrent_vector.h"
+#include "tbb/concurrent_hash_map.h"
 #include "tbb/blocked_range.h"
 
 // typedefs
-typedef tbb::concurrent_vector<Chunk*> ChunkList;
-typedef tbb::blocked_range<ChunkList::iterator> chunkListRange;
+typedef tbb::concurrent_hash_map<std::string, Chunk*> ChunkList;
 
 class ChunkManager
 {
@@ -37,19 +37,15 @@ private:
 public:
   ChunkList chunkProcessingList; // A list for processing in the parallel for
                                  // loop in the update function
-  ChunkList
-    chunkRenderList; // A vector list of loaded Chunks that should be rendered
+  ChunkList chunkRenderList; // A vector list of loaded Chunks that should be rendered
   ChunkList chunkRebuildList; // A vector list of chunks that require rebuilding
+  ChunkList chunkUpdateFlagsList; // A vector list of chunks that need their should render flags set
   ChunkList chunkUnloadList; // A vector list of Chunks that need to be unloaded
                              // from memory
-  ChunkList
-    nchunkVisibilityList; // A vector list of Chunks that could be rendered
+  ChunkList nChunkVisibilityList; // A vector list of Chunks that could be rendered
   ChunkList pChunkVisibilityList; // A list for comparing to the new processing
                                   // list to determine which chunks should be
                                   // unloaded;
-  ChunkList chunkMeshGenList; // A vector list of chunks that should have their
-                              // meshes generated either because they have just
-                              // been loaded or because they have been modified;
 
   ChunkManager(); // A constructor stub, in future it will accept a game
                   // context(specifically a game seed and save file)
@@ -61,9 +57,15 @@ public:
                                        // change in time since the last frame, a
                                        // camera position, and a camera view
                                        // angle as a Vector3 of floats
+									   
+  std::string generateKey(int x, int y, int z);
+  Vector3 keyToVector(std::string key);
+  Vector3 wrapAround(int x, int y, int z);
 
+  /* Deprecated functions
   int translatePositionToIndex(Vector3 chunkPosition);
   Vector3* translateIndexToPosition(int chunkIndex);
+  */
   Vector3 translateCameraPositionToChunk(Vector3 cameraPosition);
 };
 

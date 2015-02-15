@@ -16,7 +16,7 @@ class PerlinNoise
 {
 public:
   PerlinNoise();
-  PerlinNoise(uint seed);
+  PerlinNoise(unsigned int seed);
   ~PerlinNoise();
 
   double turbulence1D(double x, int depth) const;

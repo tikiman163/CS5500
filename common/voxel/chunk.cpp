@@ -52,7 +52,14 @@ bool Chunk::IsSetup()
 
 void Chunk::setup()
 {
-  // A stub for chunk loading code
+  // A stub for chunk setup code
+	// Chunk render lists generation
+		// Generate a list of vertices
+		// Generate a list of triangles
+		// Generate a list of UVs for texture atlas
+	//This requires terrain generation
+	//After mesh generation, render flags must be set
+	this->setRenderFlags();
   setupd = true; // Assumes successful setup to advance program test
 }
 
@@ -66,14 +73,31 @@ void Chunk::setRebuild()
   rebuild = true;
 }
 
-int Chunk::getIndex()
+void Chunk::Rebuild()
 {
-  return index;
+	//TODO: code to rebuild the chunk mesh
+	rebuild = false;
 }
 
-void Chunk::setIndex(int ind)
+void Chunk::setRenderFlags()
 {
-  index = ind;
+	//A stub for code that determines if the chunk is surrounded
+		//Determine if all Chunks surrounding this chunk are filled
+		//This requires terrain generation
+	//A stub for code that determines if the chunk is empty
+		//check if the generated mesh contains verts
+		//This requires terrain generation
+	//A stub for code that determines if the chunk is filled
+		//check if generated chunk mesh is one large cube the size of the chunk
+		//this requires terrain generation
+		
+	//Until terrain generation we assume chunk should be rendered if visible,
+	//So flags are not modified
+}
+
+bool Chunk::sRender()
+{
+	return (!surrounded && !empty);
 }
 
 Vector3* Chunk::getPosition()

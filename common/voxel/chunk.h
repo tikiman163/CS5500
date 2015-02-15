@@ -15,10 +15,12 @@ public:
   void load();
   bool IsSetup();
   void setup();
-  int getIndex();
-  void setIndex(int ind);
   bool getRebuild();
-  void setRebuild();
+  void setRebuild();// Called by player handler class when chunk contents have changed
+					//flags the chunk as needing its mesh rebuilt
+	void Rebuild();
+	void setRenderFlags();
+	bool sRender();
   Vector3* getPosition();
 
   /*
@@ -36,10 +38,12 @@ private:
   bool loaded = false;
   bool setupd = false;
   bool rebuild = false;
+  bool surrounded = false;
+  bool empty = false;
+  bool filled = false;
   int X; // World Chunk Position;
   int Y; // World Chunk Position;
   int Z; // World Chunk Position;
-  int index;
 };
 
 #endif
