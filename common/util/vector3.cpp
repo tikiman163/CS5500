@@ -13,17 +13,17 @@ Vector3::Vector3(const float vect[3]) : x(vect[0]), y(vect[1]), z(vect[2])
 {
 }
 
-const float Vector3::getX()
+float Vector3::getX() const
 {
 	return x;
 }
 
-const float Vector3::getY()
+float Vector3::getY() const 
 {
 	return y;
 }
 
-const float Vector3::getZ()
+float Vector3::getZ() const 
 {
 	return z;
 }
@@ -151,7 +151,7 @@ bool Vector3::operator!=(const Vector3& vector) const
   return ((x != vector.x) || (y != vector.y) || (z != vector.z));
 }
 
-const float Vector3::GetLength()
+float Vector3::GetLength() const
 {
 	const float squared = x * x + y * y + z * z;
 	if (squared != 0)
