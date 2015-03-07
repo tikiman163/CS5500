@@ -267,14 +267,14 @@ void ChunkManager::Update(float /*deltaTime*/,
 		{
 			for(ChunkList::iterator i = r.begin(); i != r.end(); i++)
 			{ // A for loop that removes and unloads chunks
-//				if (i != NULL)
-//				{
+				if (i->second != NULL)
+				{
 					Chunk* pChunk = i->second;
 					delete pChunk;
 						// Deletes the chunk to simulate the unload function
                         // which will be written after world persistence is
                         // implemented
-//				}
+				}
 			}
     });
     chunkUnloadList.clear(); // clearing the list for reuse on the next update
